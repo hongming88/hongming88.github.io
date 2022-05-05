@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2022/05/05/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>test</title>
+    <url>/2022/03/16/test/</url>
+    <content><![CDATA[<p>test</p>
+]]></content>
+      <categories>
+        <category>testC</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Redis</title>
+    <url>/2022/03/16/database/reids/Redis%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="redis安装"><a href="#redis安装" class="headerlink" title="redis安装"></a>redis安装</h1><h2 id="第一步gcc"><a href="#第一步gcc" class="headerlink" title="第一步gcc"></a>第一步gcc</h2><p>安装C 语言的编译环境</p>
+<p>yum install gcc</p>
+<p>测试 gcc版本 </p>
+<p>yum –version</p>
+<p><img src="/../../pics/database/redis/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%80%E6%AD%A5.jpg" alt="安装第一步"></p>
+<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>下载redis-6.2.1.tar.gz放&#x2F;opt目录</p>
+<p>tar -zxvf redis-6.2.1.tar.gz</p>
+<p>解压完成后进入目录：cd redis-6.2.1</p>
+<p>在redis-6.2.1目录下再次执行make命令（只是编译好）</p>
+<p>成功后：</p>
+<p><img src="/../../pics/database/redis/%E5%AE%89%E8%A3%85%E7%AC%AC%E4%BA%8C%E6%AD%A5.jpg" alt="安装第一步"></p>
+<p>成功后查看默认安装目录： &#x2F;usr&#x2F;local&#x2F;bin </p>
+<p>redis-benchmark:性能测试工具，可以在自己本子运行，看看自己本子性能如何<br>redis-check-aof：修复有问题的AOF文件，rdb和aof后面讲<br>redis-check-dump：修复有问题的dump.rdb文件<br>redis-sentinel：Redis集群使用<br>redis-server：Redis服务器启动命令<br>redis-cli：客户端，操作入口</p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>把redis.conf复习到&#x2F;myredis下</p>
+<p>修改</p>
+<ol>
+<li><p>后台启动设置daemonize no改成yes(支持后台启动)</p>
+</li>
+<li><p>注视bind&#x3D;127.0.0.1（变成所有人都能连，也能加ip地址）</p>
+</li>
+<li><p>protected-mode 将本机访问保护模式设置no</p>
+</li>
+<li><p>requirepass xxx(设置密码)</p>
+</li>
+</ol>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="第一种：redis-cli"><a href="#第一种：redis-cli" class="headerlink" title="第一种：redis-cli"></a>第一种：redis-cli</h2><p>启动服务：redis-server &#x2F;myredis&#x2F;redis.conf</p>
+<p>查看 ： ps -ef|grep redis</p>
+<p>客户端连接（一定要先启动服务）：</p>
+<ol>
+<li>redis-cli -a xxx(xxx是密码)</li>
+<li>先redis-cli 再AUTH xxx</li>
+</ol>
+<p>关闭：</p>
+<ol>
+<li>查看进程号后用: kill -9 进程号</li>
+<li>redis-cli -a xxx shutdown（xxx是密码）</li>
+</ol>
+<h2 id="第二种（RDM）"><a href="#第二种（RDM）" class="headerlink" title="第二种（RDM）"></a>第二种（RDM）</h2><p>打开端口：</p>
+<p><code>vi /etc/sysconfig/iptables</code></p>
+<p>加入防火墙规则：</p>
+<p><code>-A INPUT -m state –state NEW -m tcp -p tcp –dport 6379 -j ACCEPT</code></p>
+<p>重启防火墙：</p>
+<p><code>service iptables status</code></p>
+<p>查看端口是否开放：</p>
+<p>netstat -aptn  </p>
+<p>如果在某云服务器，注意增加安全组策略</p>
+<p>附上几条防火墙命令：</p>
+<p>service iptables status # 查看iptables状态<br>service iptables restart # iptables服务重启<br>service iptables stop  # iptables服务禁用</p>
+<h1 id="windows安装配置"><a href="#windows安装配置" class="headerlink" title="windows安装配置"></a>windows安装配置</h1><p>windows下载:<code>redis-server.exe redis.windows.conf</code></p>
+<p>修改配置文件在<code>redis.windows.conf</code></p>
+<p>下载地址：<a href="https://github.com/tporadowski/redis/releases">https://github.com/tporadowski/redis/releases</a></p>
+<h1 id="Redis在项目中的使用场景"><a href="#Redis在项目中的使用场景" class="headerlink" title="Redis在项目中的使用场景"></a>Redis在项目中的使用场景</h1><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>比如说 ，我想知道什么时候封锁一个IP地址。Incrby命令</td>
+</tr>
+<tr>
+<td>Hash</td>
+<td>存储用户信息【id，name，age】Hset(key,field,value)Hset(userKey,id,101)Hset(userKey,name,admin)Hset(userKey,age,23)—-修改案例—-Hget(userKey,id)Hset(userKey,id,102)为什么不使用String 类型来存储Set(userKey,用信息的字符串)Get(userKey)不建议使用String 类型</td>
+</tr>
+<tr>
+<td>List</td>
+<td>实现最新消息的排行，还可以利用List的push命令，将任务存在list集合中，同时使用另一个命令，将任务从集合中取出[pop]。Redis—list数据类型来模拟消息队列。【电商中的秒杀就可以采用这种方式来完成一个秒杀活动】</td>
+</tr>
+<tr>
+<td>Set</td>
+<td>特殊之处：可以自动排重。比如说微博中将每个人的好友存在集合(Set)中，这样求两个人的共通好友的操作。我们只需要求交集即可。</td>
+</tr>
+<tr>
+<td>Zset</td>
+<td>以某一个条件为权重，进行排序。京东：商品详情的时候，都会有一个综合排名，还可以按照价格进行排名。</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>database</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>mysql</title>
+    <url>/2022/03/16/database/mysql/Mysql/</url>
+    <content><![CDATA[<h1 id="逻辑架构"><a href="#逻辑架构" class="headerlink" title="逻辑架构"></a>逻辑架构</h1><img src="..\..\pics\database\mysql\逻辑架构2.png" style="zoom:45%;" />
+
+<img src="..\..\pics\database\mysql\逻辑架构.png" style="zoom:75%;" />
+
+
+
+<h2 id="连接层"><a href="#连接层" class="headerlink" title="连接层"></a>连接层</h2><p><font color="red"><strong>每一个客户端发起一个新的请求都由服务器端的连接&#x2F;线程处理工具负责接收客户端的请求并开辟一个新的内存空间，在服务器端的内存中生成一个新的线程，当每一个用户连接到服务器端的时候就会在进程地址空间里生成一个新的线程用于响应客户端请求，用户发起的查询请求都在线程空间内运行， 结果也在这里面缓存并返回给服务器端</strong></font>。线程的重用和销毁都是由连接&#x2F;线程处理管理器实现的。</p>
+<p>　　综上所述：用户发起请求，连接&#x2F;线程处理器开辟内存空间，开始提供查询的机制。</p>
+<p>最上层是一些客户端和连接服务，包含本地sock 通信和大多数基于客户端&#x2F;服务端工具实现的类似于tcp&#x2F;ip 的通信。主要完成一些类似于连接处理、授权认证、及相关的安全方案。在<strong>该层上引入了线程池的概念，为通过认证安全接入的客户端提供线程</strong>。同样在该层上可以实现基于SSL 的安全链接。服务器也会为安全接入的每个客户端验证它所具有的操作权限。</p>
+<p>可以通过如下命令查看连接配置信息：<code>SHOW VARIABLES LIKE &#39;%connect%&#39;;</code>可以看到最大连接和每个连接占用的内存等相关配置。</p>
+<h2 id="服务层"><a href="#服务层" class="headerlink" title="服务层"></a>服务层</h2><table>
+<thead>
+<tr>
+<th>Management Serveices &amp; Utilities</th>
+<th>系统管理和控制工具</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SQL Interface:</td>
+<td>接口。接受用户的SQL 命令，并且返回用户需要查询的结果。比如select from就是调用SQL Interface</td>
+</tr>
+<tr>
+<td>Parser</td>
+<td>解析器。SQL 命令传递到解析器的时候会被解析器验证和解析</td>
+</tr>
+<tr>
+<td>Optimizer</td>
+<td>查询优化器。SQL 语句在查询之前会使用查询优化器对查询进行优化，比如有where 条件时，优化器来决定先投影还是先过滤。</td>
+</tr>
+<tr>
+<td>Cache 和Buffer</td>
+<td>查询缓存。如果查询缓存有命中的查询结果，查询语句就可以直接去查询缓存中取数据。这个缓存机制是由一系列小缓存组成的。比如表缓存，记录缓存，key 缓存，权限缓存等</td>
+</tr>
+</tbody></table>
+<h2 id="引擎层"><a href="#引擎层" class="headerlink" title="引擎层"></a>引擎层</h2><p>存储引擎层，存储引擎真正的负责了MySQL 中数据的存储和提取，服务器通过API 与存储引擎进行通信。不同<br>的存储引擎具有的功能不同，这样我们可以根据自己的实际需要进行选取。</p>
+<p>可以通过下面两个命令查看MySQL当前版本，和对存储引擎的支持情况。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> VERSION() ; <span class="keyword">SHOW</span> ENGINES ;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="存储层"><a href="#存储层" class="headerlink" title="存储层"></a>存储层</h2><p>数据存储层，主要是将数据存储在运行于裸设备的文件系统之上，并完成与存储引擎的交互。</p>
+<h2 id="MySQL查询过程"><a href="#MySQL查询过程" class="headerlink" title="MySQL查询过程"></a><strong>MySQL查询过程</strong></h2><img src="..\..\pics\database\mysql\查询过程.png" style="zoom:44%;" />
+
+
+
+<p>参考连接：<a href="https://blog.csdn.net/fuzhongmin05/article/details/70904190">https://blog.csdn.net/fuzhongmin05/article/details/70904190</a></p>
+<h2 id="MyISAM-和InnoDB"><a href="#MyISAM-和InnoDB" class="headerlink" title="MyISAM 和InnoDB"></a>MyISAM 和InnoDB</h2><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th align="center">MyISAM</th>
+<th align="center">InnoDB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>外键</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td>事务</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td>行表锁</td>
+<td align="center">表锁，即使操作一条记录也会锁住整个表，不适合高并发的操作</td>
+<td align="center">行锁,操作时只锁某一行，不对其它行有影响，<strong>适合高并发</strong>的操作</td>
+</tr>
+<tr>
+<td>缓存</td>
+<td align="center">只缓存索引，不缓存真实数据</td>
+<td align="center">不仅缓存索引还要缓存真实数据，对内存要求较高，而且内存大小对性能有决定性的影响</td>
+</tr>
+<tr>
+<td>关注点</td>
+<td align="center">读性能</td>
+<td align="center">并发写、事务、资源</td>
+</tr>
+<tr>
+<td>默认安装</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>默认使用</td>
+<td align="center">N</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>自带系统表使用</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+</tr>
+</tbody></table>
+<p>查看命令：</p>
+<ul>
+<li><p>查看mysql以提供什么存储引擎</p>
+<ul>
+<li><code>show engines;</code></li>
+</ul>
+</li>
+<li><p>查看mysql当前默认的存储引擎</p>
+<ul>
+<li><code>show variables like &#39;%storage_engine%&#39;;</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><h2 id="索引是什么"><a href="#索引是什么" class="headerlink" title="索引是什么"></a>索引是什么</h2><p><strong>MySQL官方对索引的定义为：索引（Index）是帮助MySQL高效获取数据的数据结构。可以得到索引的本质：索引是数据结构。</strong></p>
+<p>索引的目的在于提高查询效率，可以类比字典。</p>
+<p>如果要查“mysql”这个单词，我们肯定需要定位到m字母，然后从下往下找到y字母，再找到剩下的sql。</p>
+<p>如果没有索引，那么你可能需要逐个逐个寻找，如果我想找到Java开头的单词呢？或者Oracle开头的单词呢？</p>
+<p>是不是觉得如果没有索引，这个事情根本无法完成？</p>
+<p>你可以简单理解为“排好序的快速查找数据结构”。</p>
+<p>详解：</p>
+<p>在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用(指向）数据，这样就可以在这些数据结构上实现高级查找算法。这种数据结构，就是索引。下图就是<strong>一种可能的索引方式</strong>示例：</p>
+<p><img src="/....%5Cpics%5Cdatabase%5Cmysql%5C%E7%B4%A2%E5%BC%951.jpg"></p>
+<p>左边是<strong>数据表</strong>，一共有两列七条记录，最左边的是数据记录的<strong>物理地址</strong>。</p>
+<p>为了加快Col2的查找，可以维护一个右边所示的二叉查找树，每个节点分别包含索引键值和一个指向对应数据记录物理地址的指针，这样就可以运用二叉查找在一定的复杂度内获取到相应数据，从而快速的检索出符合条件的记录。</p>
+<p><strong>数据本身之外，数据库还维护着一个满足特定查找算法的数据结构，这些数据结构以某种方式指向数据，这样就可以在这些数据结构的基础上实现高级查找算法，这种数据结构就是索引。</strong></p>
+<p><font color="red">一般来说索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。</font></p>
+<p>&#x3D;&#x3D;我们平常所说的索引，如果没有特别指明，都是指B树（多路搜索树，并不一定是二叉的）结构组织的索引。&#x3D;&#x3D;其中聚集索引，次要索引，覆盖索引，复合索引，前缀索引，唯一索引默认都是使用B+树索引，统称索引。当然，除了B+树这种类型的索引之外，还有哈稀索引(hash index)等。</p>
+<h2 id="索引优劣势"><a href="#索引优劣势" class="headerlink" title="索引优劣势"></a>索引优劣势</h2><p><strong>优势</strong></p>
+<ul>
+<li><p>类似大学图书馆建书目索引，提高数据检索的效率，降低数据库的IO成本。</p>
+</li>
+<li><p>通过索引列对数据进行排序，降低数据排序的成本，降低了CPU的消耗。</p>
+</li>
+</ul>
+<p><strong>劣势</strong></p>
+<ul>
+<li><p>实际上索引也是一张表，该表保存了主键与索引字段，并指向实体表的记录，所以索引列也是要占用空间的（占空间）</p>
+</li>
+<li><p>虽然索引大大提高了查询速度，同时却会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。<strong>因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件每次更新添加了索引列的字段，都会调整因为更新所带来的键值变化后的索引信息</strong>。</p>
+</li>
+<li><p>索引只是提高效率的一个因素，如果你的MysQL有大数据量的表，就需要花时间研究建立最优秀的索引，或优化查询。</p>
+</li>
+</ul>
+<p><strong>总结</strong></p>
+<ul>
+<li>索引，空间换取时间。</li>
+</ul>
+<h2 id="索引分类和建索引命令语句"><a href="#索引分类和建索引命令语句" class="headerlink" title="索引分类和建索引命令语句"></a>索引分类和建索引命令语句</h2><p><strong>MySQL索引分类：</strong></p>
+<ul>
+<li>单值索引：即一个索引只包含单个列，一个表可以有多个单列索引。</li>
+<li>唯一索引：索引列的值必须唯一，但允许有空值。</li>
+<li>主键索引:设定为主键后数据库会自动建立索引，innodb为聚簇索引</li>
+<li>复合索引：即一个索引包含多个列。</li>
+<li>基本语法：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>创建</td>
+<td>- <code>CREATE [UNIQUE] INDEX indexName ON mytable(columnName(length));</code><br/>- <code>ALTER mytable ADD [UNIQUE] INDEX [indexName] ON (columnName(length));</code></td>
+</tr>
+<tr>
+<td>删除</td>
+<td><code>DROP INDEX [indexName] ON mytable;</code></td>
+</tr>
+<tr>
+<td>查看</td>
+<td><code>SHOW INDEX FROM tableName;</code></td>
+</tr>
+<tr>
+<td>使用alter命令 有四种方式来添加数据表的索引</td>
+<td><code>ALTER TABLE tbl_name ADD PRIMARY KEY (column_list);</code>：该语句添加一个主键，这意味着索引值必须是唯一的，且不能为NULL。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ALTER TABLE tbl name ADD UNIQUE index_name (column_list);</code>：这条语句创建索引的值必须是唯一的(除了NULL外，NULL可能会出现多次)。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ALTER TABLE tbl_name ADD INDEX index_name (column_list);</code>：添加普通索引，索引值可出现多次。</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ALTER TABLE tbl_name ADD FULLTEXT index_name (column_list);</code>：该语句指定了索引为FULLTEXT，用于全文索引。</td>
+</tr>
+</tbody></table>
+<h2 id="索引的创建时机"><a href="#索引的创建时机" class="headerlink" title="索引的创建时机"></a>索引的创建时机</h2><p> <strong>适合创建索引的情况</strong></p>
+<ul>
+<li><p>主键自动建立唯一索引；</p>
+</li>
+<li><p>频繁作为查询条件的字段应该创建索引</p>
+</li>
+<li><p>查询中与其它表关联的字段，外键关系建立索引</p>
+</li>
+<li><p>单键&#x2F;组合索引的选择问题， 组合索引性价比更高</p>
+</li>
+<li><p>查询中排序的字段，排序字段若通过索引去访问将大大提高排序速度</p>
+</li>
+<li><p>查询中统计或者分组字段</p>
+</li>
+</ul>
+<p><strong>不适合创建索引的情况</strong></p>
+<ul>
+<li>表记录太少</li>
+<li>经常增删改的表或者字段</li>
+</ul>
+<h1 id="Explain-性能分析"><a href="#Explain-性能分析" class="headerlink" title="Explain 性能分析"></a>Explain 性能分析</h1><h2 id="性能分析前提知识"><a href="#性能分析前提知识" class="headerlink" title="性能分析前提知识"></a>性能分析前提知识</h2><p><strong>MySQL Query Optimizer</strong></p>
+<ul>
+<li><p><strong>Mysql中有专门负责优化SELECT语句的优化器模块</strong>，主要功能:通过计算分析系统中收集到的统计信息，为客户端请求的Query提供他认为最优的执行计划（他认为最优的数据检索方式，但不见得是DBA认为是最优的,这部分最耗费时间）</p>
+</li>
+<li><p>当客户端向MySQL请求一条Query，命令解析器模块完成请求分类，区别出是SELECT并转发给MySQL Query Optimizer时，MySQL Query Optimizer首先会对整条Query进行优化，处理掉一些常量表达式的预算直接换算成常量值。并对Query中的查询条件进行简化和转换，如去掉一些无用或显而易见的条件、结构调整等。然后分析Query 中的 Hint信息(如果有），看显示Hint信息是否可以完全确定该Query的执行计划。如果没有Hint 或Hint信息还不足以完全确定执行计划，则会读取所涉及对象的统计信息，根据Query进行写相应的计算分析，然后再得出最后的执行计划。</p>
+</li>
+</ul>
+<p><strong>MySQL常见瓶颈</strong></p>
+<ul>
+<li><code>CPU</code>：CPU在饱和的时候一般发生在数据装入内存或从磁盘上读取数据时候</li>
+<li><code>IO</code>：磁盘I&#x2F;O瓶颈发生在装入数据远大于内存容量的时候</li>
+<li>服务器硬件的性能瓶颈：top，free，iostat和vmstat来查看系统的性能状态</li>
+</ul>
+<h2 id="explain使用简介"><a href="#explain使用简介" class="headerlink" title="explain使用简介"></a><strong>explain使用简介</strong></h2><p>使用EXPLAIN关键字可以模拟优化器执行SQL查询语句，从而知道MySQL是如何处理你的SQL语句的。分析你的查询语句或是表结构的性能瓶颈。</p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/execution-plan-information.html">官网地址</a></p>
+<p><strong>能干嘛</strong></p>
+<ul>
+<li>表的读取顺序</li>
+<li>数据读取操作的操作类型</li>
+<li>哪些索引可以使用</li>
+<li>哪些索引被实际使用</li>
+<li>表之间的引用</li>
+<li>每张表有多少行被优化器查询</li>
+</ul>
+<p><strong>怎么玩</strong></p>
+<p><code>explain + sql语句</code></p>
+<p>执行计划包含的信息<br>| id | select_type | table | partitions | type | possible_keys | key | key_len | ref | rows | filtered | Extra |</p>
+<p>例如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tbl_dept;</span><br><span class="line"><span class="operator">+</span><span class="comment">----+----------+--------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> deptName <span class="operator">|</span> locAdd <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+----------+--------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> RD       <span class="operator">|</span> <span class="number">11</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">2</span> <span class="operator">|</span> HR       <span class="operator">|</span> <span class="number">12</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">3</span> <span class="operator">|</span> MK       <span class="operator">|</span> <span class="number">13</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">4</span> <span class="operator">|</span> MIS      <span class="operator">|</span> <span class="number">14</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">5</span> <span class="operator">|</span> FD       <span class="operator">|</span> <span class="number">15</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+----------+--------+</span></span><br><span class="line"><span class="number">5</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tbl_dept;</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> select_type <span class="operator">|</span> <span class="keyword">table</span>    <span class="operator">|</span> partitions <span class="operator">|</span> type <span class="operator">|</span> possible_keys <span class="operator">|</span> key  <span class="operator">|</span> key_len <span class="operator">|</span> <span class="keyword">ref</span>  <span class="operator">|</span> <span class="keyword">rows</span> <span class="operator">|</span> filtered <span class="operator">|</span> Extra <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> SIMPLE      <span class="operator">|</span> tbl_dept <span class="operator">|</span> <span class="keyword">NULL</span>       <span class="operator">|</span> <span class="keyword">ALL</span>  <span class="operator">|</span> <span class="keyword">NULL</span>          <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span>    <span class="number">5</span> <span class="operator">|</span>   <span class="number">100.00</span> <span class="operator">|</span> <span class="keyword">NULL</span>  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+</span></span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span>, <span class="number">1</span> warning (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="explain之id介绍"><a href="#explain之id介绍" class="headerlink" title="explain之id介绍"></a>explain之id介绍</h2><p>select查询的序列号，包含一组数字，表示查询中执行select子句或操作表的顺序</p>
+<p>三种情况：</p>
+<ul>
+<li>id相同，执行顺序由上至下</li>
+<li>id不同，如果是子查询，id的序号会递增，id值越大优先级越高，越先被执行</li>
+<li>id相同不同，同时存在</li>
+</ul>
+<p>①<strong>id相同，执行顺序由上至下</strong></p>
+<p><img src="/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id1.jpg"></p>
+<p>②<strong>id 不同，id 不同，如果是子查询，id 的序号会递增，id 值越大优先级越高，越先被执行</strong></p>
+<p><img src="/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id2.jpg"></p>
+<p>③id 如果相同，可以认为是一组，从上往下顺序执行；<strong>在所有组中，id 值越大，优先级越高</strong>，越先执行衍生&#x3D; DERIVED</p>
+<p><img src="/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id3.jpg"></p>
+<p>关注点：<font color="red">id 号每个号码，表示一趟独立的查询。一个sql 的查询趟数越少越好。</font></p>
+<h2 id="explain之select-type和table介绍"><a href="#explain之select-type和table介绍" class="headerlink" title="explain之select_type和table介绍"></a>explain之select_type和table介绍</h2><p><strong>select_type</strong>：查询的类型，主要是用于区别普通查询、联合查询、子查询等的复杂查询。</p>
+<p><strong>select_type有哪些？</strong></p>
+<ol>
+<li><code>SIMPLE</code> - 简单的select查询,查询中不包含子查询或者UNION。</li>
+<li><code>PRIMARY</code> - 查询中若包含任何复杂的子部分，最外层查询则被标记为。</li>
+<li><code>SUBQUERY</code> - 在SELECT或WHERE列表中包含了子查询。</li>
+<li><code>DERIUED</code> - 在FROM列表中包含的子查询被标记为DERIVED（衍生）MySQ会递归执行这些子查询，把结果放在临时表里。</li>
+<li><code>UNION</code> - 若第二个SELECT出现在UNION之后，则被标记为UNION；若UNION包含在FROM子句的子查询中外层SELECT将被标记为：DERIVED。</li>
+<li><code>UNION RESULT</code> - 从UNION表获取结果的SELECT。</li>
+</ol>
+<p><strong>table</strong>：显示这一行的数据是关于哪张表的。</p>
+<h2 id="explain之type介绍"><a href="#explain之type介绍" class="headerlink" title="explain之type介绍"></a>explain之type介绍</h2><p>访问类型排列</p>
+<p>type显示的是访问类型，是较为重要的一个指标，结果值从最好到最坏依次是：</p>
+<p>system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt;ALL</p>
+<p><font color="red">从最好到最差以此是</font>:</p>
+<p>system&gt;const&gt;eq_ref&gt;ref&gt;range&gt;index&gt;ALL</p>
+<p><strong>详细说明</strong></p>
+<ul>
+<li><code>system</code>：表只有一行记录（等于系统表），这是const类型的特列，平时不会出现，这个也可以忽略不计。</li>
+<li><code>const</code>：表示通过索引一次就找到了，const用于比较primary key或者unique索引。因为只匹配一行数据，所以很快如将主键置于where列表中，MySQL就能将该查询转换为一个常量。</li>
+<li><code>eq_ref</code>：唯一性索引扫描，对于每个索引键，表中只有一条记录与之匹配。常见于主键或唯一索引扫描。</li>
+<li><code>ref</code>：非唯一性索引扫描，返回匹配某个单独值的所有行，本质上也是一种索引访问，它返回所有匹配某个单独值的行，然而，它可能会找到多个符合条件的行，所以他应该属于查找和扫描的混合体。</li>
+<li><code>range</code>：只检索给定范围的行,使用一个索引来选择行。key列显示使用了哪个索引一般就是在你的where语句中出现了between、&lt;、&gt;、in等的查询。这种范围扫描索引扫描比全表扫描要好，因为它只需要开始于索引的某一点，而结束语另一点，不用扫描全部索引。</li>
+<li><code>index</code>：Full Index Scan，index与ALL区别为index类型只遍历索引树。这通常比ALL快，因为索引文件通常比数据文件小（也就是说虽然all和Index都是读全表，但index是从索引中读取的，而all是从硬盘中读的）。</li>
+<li><code>all</code>：Full Table Scan，将遍历全表以找到匹配的行。</li>
+</ul>
+<p><font color="red">一般来说，得保证查询至少达到range级别，最好能达到ref。</font></p>
+<h2 id="explain之possible-keys和key介绍"><a href="#explain之possible-keys和key介绍" class="headerlink" title="explain之possible_keys和key介绍"></a>explain之possible_keys和key介绍</h2><p><strong>possible_keys</strong></p>
+<p>显示可能应用在这张表中的索引，一个或多个。查询涉及到的字段火若存在索引，则该索引将被列出，&#x3D;&#x3D;但不一定被查询实际使用&#x3D;&#x3D;。</p>
+<p><strong>key</strong></p>
+<p><strong>实际使用的索引</strong>。如果为NULL，则没有使用索引</p>
+<p><strong>查询中若使用了覆盖索引，则该索引仅出现在key列表中</strong></p>
+<h2 id="explain之key-len介绍"><a href="#explain之key-len介绍" class="headerlink" title="explain之key_len介绍"></a>explain之key_len介绍</h2><p>表示索引中使用的字节数，可通过该列计算查询中使用的索引的长度。key_len 字段能够帮你检查是否充分的 利用上了索引。ken_len 越长，说明索引使用的越充分。在不损失精确性的情况下，长度越短越好</p>
+<p>key_len显示的值为索引字段的最大可能长度，<strong>并非实际使用长度</strong>，即key_len是根据表定义计算而得，不是通过表内检索出的</p>
+<p><strong>如何计算</strong>：<br>①先看索引上字段的类型+长度比如<code>int=4 ; varchar(20) =20 ; char(20) =20</code><br>②如果是varchar 或者char 这种字符串字段，视字符集要乘不同的值，比如utf-8 要乘3,GBK 要乘2，<br>③varchar 这种动态字符串要加2 个字节<br>④允许为空的字段要加1 个字节</p>
+<h2 id="explain之ref介绍"><a href="#explain之ref介绍" class="headerlink" title="explain之ref介绍"></a>explain之ref介绍</h2><p><strong>显示索引的哪一列被使用了，如果可能的话，是一个常数。哪些列或常量被用于查找索引列上的值。</strong></p>
+<p>查询中与其它表关联的字段，外键关系建立索引。</p>
+<h2 id="explain之rows介绍"><a href="#explain之rows介绍" class="headerlink" title="explain之rows介绍"></a>explain之rows介绍</h2><p>根据表统计信息及索引选用情况，大致估算出找到所需的记录所需要读取的行数。</p>
+<p>rows 列显示MySQL 认为它执行查询时必须检查的行数。越少越好！</p>
+<h2 id="explain之Extra介绍"><a href="#explain之Extra介绍" class="headerlink" title="explain之Extra介绍"></a>explain之Extra介绍</h2><p>包含不适合在其他列中显示但十分重要的额外信息。</p>
+<p><strong>Using filesort</strong>（九死一生）</p>
+<p>说明mysql会对数据使用一个外部的索引排序，而不是按照表内的索引顺序进行读取。<font color="red">MySQL中无法利用索引完成的排序操作称为”文件排序”</font></p>
+<p><strong>Using temporary</strong>（不好）</p>
+<p>使了用临时表保存中间结果，MysQL在对查询结果排序时使用临时表。常见于排序order by和分组查询group by。</p>
+<p><strong>Using index</strong></p>
+<p>表示相应的select操作中使用了覆盖索引（Covering Index），避免访问了表的数据行，效率不错！</p>
+<p>如果同时出现using where，表明索引被用来执行索引键值的查找；</p>
+<p>如果没有同时出现using where，表明索引用来读取数据而非执行查找动作。</p>
+<p><font color="red"> <strong>覆盖索引</strong>（Covering Index）</font>,一说为索引覆盖。</p>
+<ul>
+<li><p>理解方式一：就是select的数据列只用从索引中就能够取得，不必读取数据行，MySQL可以利用索引返回select列表中的字段，而不必根据索引再次读取数据文件,换句话说<strong>查询列要被所建的索引覆盖</strong>。</p>
+</li>
+<li><p>理解方式二：索引是高效找到行的一个方法，但是一般数据库也能使用索引找到一个列的数据，因此它不必读取整个行。毕竟索引叶子节点存储了它们索引的数据；当能通过读取索引就可以得到想要的数据，那就不需要读取行了。一个索引包含了（或覆盖了）满足查询结果的数据就叫做覆盖索引。</p>
+</li>
+<li><p>注意：如果要使用覆盖索引，一定要注意select列表中只取出需要的列，不可select*，因为如果将所有字段一起做索引会导致索引文件过大，查询性能下降。</p>
+</li>
+</ul>
+<p>（简单表达）常见的方法是：将被查询的字段，建立到联合索引里去。</p>
+<p><strong>Using where</strong></p>
+<p>表明使用了where过滤。</p>
+<p><strong>Using join buffer</strong></p>
+<p>使用了连接缓存。</p>
+<p><strong>impossible where</strong></p>
+<p>where子句的值总是false，不能用来获取任何元组。</p>
+<p><strong>select tables optimized away</strong></p>
+<p>在没有GROUPBY子句的情况下，基于索引优化MIN&#x2F;MAX操作，或者对于MyISAM存储引擎优化COUNT(*)操作，不必等到执行阶段再进行计算，查询执行计划生成的阶段即完成优化。</p>
+<p><strong>distinct</strong></p>
+<p>优化distinct操作，在找到第一匹配的元组后即停止找同样值的动作。</p>
+<h2 id="explain之热身Case"><a href="#explain之热身Case" class="headerlink" title="explain之热身Case"></a>explain之热身Case</h2><p><img src="/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_Case.png"></p>
+<p>第一行（执行顺序4）：id列为1，表示是union里的第一个select，select_type列的primary表示该查询为外层查询，table列被标记为，表示查询结果来自一个衍生表，其中derived3中3代表该查询衍生自第三个select查询，即id为3的select。<code>【select d1.name… 】</code></p>
+<p>第二行（执行顺序2）：id为3，是整个查询中第三个select的一部分。因查询包含在from中，所以为derived。<code>【select id,namefrom t1 where other_column=’’】</code></p>
+<p>第三行（执行顺序3）：select列表中的子查询select_type为subquery，为整个查询中的第二个select。<code>【select id from t3】</code></p>
+<p>第四行（执行顺序1）：select_type为union，说明第四个select是union里的第二个select，最先执行<code>【select name,id from t2】</code></p>
+<p>第五行（执行顺序5）：代表从union的临时表中读取行的阶段，table列的&lt;union1,4&gt;表示用第一个和第四个select的结果进行union操作。<code>【两个结果union操作】</code></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>id,type,key,rows Extra最重要了</p>
+<h1 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h1><h2 id="索引单表优化案例"><a href="#索引单表优化案例" class="headerlink" title="索引单表优化案例"></a>索引单表优化案例</h2><p><code>mysql&gt; explain SELECT id, author_id FROM article WHERE category_id = 1 AND comments = 1 ORDER BY views DESC LIMIT 1;</code></p>
+<p>type变成了range，这是可以忍受的。但是extra里使用Using filesort仍是无法接受的。</p>
+<p>但是我们已经建立了索引，为啥没用呢？</p>
+<p>这是因为按照BTree索引的工作原理，先排序category_id，如果遇到相同的category_id则再排序comments,如果遇到相同的comments 则再排序views。</p>
+<p>当comments字段在联合索引里处于中间位置时，因comments &gt; 1条件是一个范围值(所谓range)，MySQL无法利用索引再对后面的views部分进行检索，即range类型查询字段后面的索引无效。</p>
+<h2 id="索引两表优化案例"><a href="#索引两表优化案例" class="headerlink" title="索引两表优化案例"></a>索引两表优化案例</h2><p><strong>小结</strong></p>
+<p>索引两表优化，<font color="red">左连接右表建索引，右连接左表建索引。</font></p>
+<p>主表不管加不加都会全表扫描</p>
+<h2 id="索引三表优化案例"><a href="#索引三表优化案例" class="headerlink" title="索引三表优化案例"></a>索引三表优化案例</h2><p>Join语句的优化</p>
+<p>尽可能减少Join语句中的NestedLoop的循环总次数，不要join过多或者嵌套；<font color="red">“永远用小结果集驱动大的结果集”。</font></p>
+<p>优先优化NestedLoop的内层循环，保证Join语句中被驱动表上Join条件字段已经被索引。</p>
+<p>当无法保证被驱动表的Join条件字段被索引且内存资源充足的前提下，不要太吝惜JoinBuffer的设置。</p>
+<h1 id="单表使用索引常见的索引失效"><a href="#单表使用索引常见的索引失效" class="headerlink" title="单表使用索引常见的索引失效"></a>单表使用索引常见的索引失效</h1><p>索引失效（应该避免）</p>
+<ol>
+<li><p>最佳左前缀法则 - <font color="red">如果索引了多列，要遵守最左前缀法则。<strong>指的是查询从索引的最左前列开始并且不跳过复合索引中间列。</strong></font></p>
+</li>
+<li><p>不在<strong>索引列上做任何操作</strong>（计算、函数、（自动or手动）类型转换），会导致索引失效而转向全表扫描。</p>
+<p>如：<code>SELECT SQL_NO_CACHE * FROM emp WHERE LEFT(age,3)=30;</code></p>
+</li>
+<li><p>存储引擎<strong>不能使用索引中范围条件右边的列</strong>。(范围之后全失效，所以范围放后面)</p>
+<p>如：<code>mysql&gt; EXPLAIN SELECT * FROM staffs WHERE NAME=&#39;July&#39; AND age&gt;25 AND pos=&#39;dev&#39;</code></p>
+<ul>
+<li><code>这里我的理解是,age&gt;25是需要遍历的,在遍历的过程中同时判断了pos条件,因此pos的索引就无效了</code></li>
+</ul>
+</li>
+<li><p>尽量使用覆盖索引（只访问索引的查询（索引列和查询列一致）），减少select *。</p>
+<p>如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">explain <span class="keyword">SELECT</span> SQL_NO_CACHE <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> emp.age<span class="operator">=</span><span class="number">30</span> <span class="keyword">and</span> deptId<span class="operator">=</span><span class="number">4</span> <span class="keyword">and</span> name<span class="operator">=</span><span class="string">&#x27;XamgXt&#x27;</span>;()</span><br><span class="line"></span><br><span class="line">explain <span class="keyword">SELECT</span> SQL_NO_CACHE age,deptId,name <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> emp.age<span class="operator">=</span><span class="number">30</span> <span class="keyword">and</span> deptId<span class="operator">=</span><span class="number">4</span> <span class="keyword">and</span> name<span class="operator">=</span><span class="string">&#x27;XamgXt&#x27;</span>;(这个有use index)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mysql在使用不等于（!&#x3D;或者&lt;&gt;）的时候<strong>无法使用索引会导致全表扫描。</strong></p>
+<p>例如：<code>mysql&gt; EXPLAIN SELECT * FROM staffs WHERE NAME is not null;</code></p>
+</li>
+<li><p>字段的is null, is not null 也无法使用索引。</p>
+</li>
+<li><p>like以通配符开头（’%abc…’），mysql索引失效会变成全表扫描的操作。</p>
+</li>
+<li><p>字符串不加单引号索引失效。</p>
+</li>
+<li><p>少用or，用它来连接时会索引失效。</p>
+</li>
+</ol>
+<p><strong>问题：解决like ‘%字符串%’时索引不被使用的方法？</strong></p>
+<p>用上索引（覆盖索引）</p>
+<p><strong>小结</strong></p>
+<p>解决like ‘%字符串%’时索引不被使用的方法？复合索引，然后覆盖索引。</p>
+<h2 id="索引失效10-小总结"><a href="#索引失效10-小总结" class="headerlink" title="索引失效10-小总结"></a>索引失效10-小总结</h2><p>小总结</p>
+<p>假设index(a, b, c)</p>
+<table>
+<thead>
+<tr>
+<th>where语句</th>
+<th>索引是否被使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>where a &#x3D; 3</td>
+<td>Y，使用到a</td>
+</tr>
+<tr>
+<td>where a &#x3D; 3 and b &#x3D; 5</td>
+<td>Y，使用到a，b</td>
+</tr>
+<tr>
+<td>where a &#x3D; 3 and b &#x3D; 5 and c &#x3D; 4</td>
+<td>Y，使用到a，b，c</td>
+</tr>
+<tr>
+<td>where b &#x3D; 3 或者 where b &#x3D; 3 and c &#x3D; 4 或者 where c &#x3D; 4</td>
+<td>Y，使用到</td>
+</tr>
+<tr>
+<td>where a &#x3D; 3 and c &#x3D; 5</td>
+<td>Y，使用到a但是c不可以，b中间断了</td>
+</tr>
+<tr>
+<td>where a &#x3D; 3 and b &gt; 4 and c &#x3D; 5</td>
+<td>Y，使用到a使用到c不能用在范围之后，b断了</td>
+</tr>
+<tr>
+<td>where a &#x3D; 3 and b like ‘kk%’ and c &#x3D; 4</td>
+<td>Y，使用到a，b，c</td>
+</tr>
+</tbody></table>
+<h2 id="口诀"><a href="#口诀" class="headerlink" title="口诀"></a>口诀</h2><p>全职匹配我最爱，最左前缀要遵守；<br>带头大哥不能死，中间兄弟不能断；<br>索引列上少计算，范围之后全失效；<br>LIKE 百分写最右，覆盖索引不写*；<br>不等空值还有OR，索引影响要注意；<br>VAR 引号不可丢，SQL 优化有诀窍。</p>
+<p>group by基本上都需要进行排序，会有临时表产生</p>
+<h2 id="一般性建议"><a href="#一般性建议" class="headerlink" title="一般性建议"></a>一般性建议</h2><ul>
+<li>对于单键索引，尽量选择针对当前query过滤性更好的索引。</li>
+<li>在选择组合索引的时候，当前Query中过滤性最好的字段在索引字段顺序中，位置越靠前越好。</li>
+<li>在选择组合索引的时候，尽量选择可以能够包含当前query中的where字句中更多字段的索引。</li>
+<li>尽可能通过分析统计信息和调整query的写法来达到选择合适索引的目的。</li>
+</ul>
+<h1 id="查询截取分析"><a href="#查询截取分析" class="headerlink" title="查询截取分析"></a>查询截取分析</h1><h2 id="小表驱动大表"><a href="#小表驱动大表" class="headerlink" title="小表驱动大表"></a>小表驱动大表</h2><p>通常SQL调优过程：</p>
+<ol>
+<li>观察，至少跑1天，看看生产的慢SQL情况。</li>
+<li>开启慢查询日志，设置阙值，比如超过5秒钟的就是慢SQL，并将它抓取出来。</li>
+<li>explain + 慢SQL分析。</li>
+<li>show profile。</li>
+<li>运维经理 or DBA，进行SQL数据库服务器的参数调优。</li>
+</ol>
+<p>总结：</p>
+<ol>
+<li>慢查询的开启并捕获</li>
+<li>explain + 慢SQL分析</li>
+<li>show profile查询SQL在Mysql服务器里面的执行细节和生命周期情况</li>
+<li>SQL数据库服务器的参数调优。</li>
+</ol>
+<p>优化原则：&#x3D;&#x3D;小表驱动大表，即小的数据集驱动大的数据集。&#x3D;&#x3D;</p>
+<p><strong>RBO原理</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from A where id in (select id from B)</span><br><span class="line">等价于:</span><br><span class="line">for select id from B</span><br><span class="line">for select * from A where A.id = B.id</span><br></pre></td></tr></table></figure>
+
+<p><strong>当B表的数据集必须小于A表的数据集时，用in优于exists。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from A where exists (select 1 from B where B.id = A.id)</span><br><span class="line">等价于：</span><br><span class="line">for select * from A</span><br><span class="line">for select * from B where B.id = A.id</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>当A表的数据集系小于B表的数据集时，用exists优于in。</strong></p>
+<p>注意：A表与B表的ID字段应建立索引。</p>
+<p><strong>EXISTS关键字</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT ...FROM table WHERE EXISTS (subquery)</span><br></pre></td></tr></table></figure>
+
+
+<p>该语法可以理解为：将主查询的数据，放到子查询中做条件验证，根据验证结果（TRUE或FALSE）来决定主查询的数据结果是否得以保留。</p>
+<p>提示</p>
+<ol>
+<li>EXSTS(subquey)只返回TRUE或FALSE，因此子查询中的SELECT * 也可以是 SELECT 1 或select ‘X’，官方说法是实际执行时会忽略SELECT清单，因此没有区别。</li>
+<li>EXISTS子查询的实际执行过程可能经过了优化而不是我们理解上的逐条对比，如果担忧效率问题，可进行实际检验以确定是否有效率问题。</li>
+<li>EXISTS子查询往往也可以用条件表达式，其他子查询或者JOIN来替代，何种最优需要具体问题具体分析</li>
+</ol>
+<p>参考：<a href="https://www.cnblogs.com/emilyyoucan/p/7833769.html">https://www.cnblogs.com/emilyyoucan/p/7833769.html</a></p>
+<h2 id="为排序使用索引OrderBy优化"><a href="#为排序使用索引OrderBy优化" class="headerlink" title="为排序使用索引OrderBy优化"></a>为排序使用索引OrderBy优化</h2><p>ORDER BY子句，尽量使用Index方式排序，避免使用FileSort方式排序</p>
+<p>MySQL支持二种方式的排序，<code>FileSort</code>和<code>Index</code>，Index效率高，它指MySQL扫描索引本身完成排序。FileSort方式效率较低。</p>
+<p>ORDER BY满足两情况，会使用Index方式排序：</p>
+<ol>
+<li><strong>ORDER BY语句使用索引最左前列</strong>。</li>
+<li><strong>使用where子句与Order BY子句条件列组合满足索引最左前列</strong>。</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> EXPLAIN <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tblA <span class="keyword">where</span> age <span class="operator">&gt;</span> <span class="number">20</span> <span class="keyword">order</span> <span class="keyword">by</span> age;</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> EXPLAIN <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tblA <span class="keyword">where</span> age<span class="operator">&gt;</span><span class="number">20</span> <span class="keyword">order</span> <span class="keyword">by</span> age,birth;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#<span class="keyword">Using</span> filesort:</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> EXPLAIN <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tblA <span class="keyword">where</span> age<span class="operator">&gt;</span><span class="number">20</span> <span class="keyword">order</span> <span class="keyword">by</span> birth;</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> EXPLAIN <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> tblA <span class="keyword">where</span> age<span class="operator">&gt;</span><span class="number">20</span> <span class="keyword">order</span> <span class="keyword">by</span> birth,age;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果不在索引列上，mysql的filesort有两种算法：</p>
+<ul>
+<li>双路排序</li>
+<li>单路排序</li>
+</ul>
+<h3 id="双路排序"><a href="#双路排序" class="headerlink" title="双路排序"></a><strong>双路排序</strong></h3><p>MySQL4.1之前是使用双路排序，字面意思就是两次扫描磁盘，最终得到数据，读取行指针和OrderBy列，对他们进行排序，然后扫描已经排序好的列表，按照列表中的值重新从列表中读对应的数据输出。</p>
+<p>从磁盘取排序字段，在buffer进行排序，再从磁盘取其他字段。</p>
+<p>取一批数据，要对磁盘进行了两次扫描，众所周知，I\O是很耗时的，所以在mysql4.1之后，出现了第二种改进的算法，就是单路排序。</p>
+<h3 id="单路排序"><a href="#单路排序" class="headerlink" title="单路排序"></a><strong>单路排序</strong></h3><p>从磁盘读取查询需要的所有列，按照order by列在buffer对它们进行排序，然后扫描排序压的列表进行输出，它的效率更快一些，避免了第二次读取数据。并且把随机IO变成了顺序IO,但是它会使用更多的空间，因为它把每一行都保存在内存中了。</p>
+<h3 id="结论及引申出的问题"><a href="#结论及引申出的问题" class="headerlink" title="结论及引申出的问题"></a><strong>结论及引申出的问题</strong></h3><p>由于单路是后出的，总体而言好过双路</p>
+<p>但是用单路有问题</p>
+<p>在sort_buffer中，方法B比方法A要多占用很多空间，因为方法B是把所有字段都取出,所以有可能取出的数据的总大小超出了sort_buffer的容量，导致每次只能取sort_buffer容量大小的数据，进行排序（创建tmp文件，多路合并)，排完再取取<br>sort_buffer容量大小，再排……从而多次I&#x2F;O。</p>
+<p>本来想省一次I&#x2F;O操作，反而导致了大量的I&#x2F;O操作，反而得不偿失。</p>
+<p>单路排序会把所有需要查询的字段都放到 sort buffer 中，而双路排序只会把主键 和需要排序的字段放到 sort buffer 中进行排序，然后再通过主键回到原表查询需要的字段</p>
+<h3 id="优化策略"><a href="#优化策略" class="headerlink" title="优化策略"></a><strong>优化策略</strong></h3><ul>
+<li>增大sort_buffer_size参数的设置</li>
+<li>增大max_length_for_sort_data参数的设置</li>
+</ul>
+<p><strong>为什么设置sort_buffer_size、max_length_for_sort_data参数能优化排序？</strong></p>
+<p>提高Order By的速度</p>
+<ol>
+<li><p>Order by时select * 是一个大忌只Query需要的字段，这点非常重要。在这里的影响是;</p>
+<ul>
+<li>当Query的字段大小总和小于max_length_for_sort_data而且排序字段不是TEXT|BLOB类型时，会用改进后的算法——单路排序，否则用老算法——多路排序。</li>
+<li>两种算法的数据都有可能超出sort_buffer的容量，超出之后，会创建tmp文件进行合并排序，导致多次IO，但是用单路排序算法的风险会更大一些，所以要提高sort_buffer__size。</li>
+</ul>
+</li>
+<li><p>尝试提高sort_buffer_size，不管用哪种算法，提高这个参数都会提高效率，当然，要根据系统的能力去提高，因为这个参数是针对每个进程的。</p>
+</li>
+<li><p>尝试提高max_length_for_sort_data，提高这个参数，会增加用改进算法的概率。但是如果设的太高，数据总容量超出sort_buffer_size的概率就增大，明显症状是高的磁盘I&#x2F;O活动和低的处理器使用率。</p>
+</li>
+</ol>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h3><p>为排序使用索引</p>
+<ul>
+<li>MySql两种排序方式∶文件排序 或 扫描有序索引排序</li>
+<li>MySql能为 排序 与 查询 使用相同的索引</li>
+</ul>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>创建复合索引 a_b_c (a, b, c)</p>
+<p>order by能使用索引最左前缀</p>
+<ul>
+<li>ORDER BY a</li>
+<li>ORDER BY a, b</li>
+<li>ORDER BY a, b, c</li>
+<li>ORDER BY a DESC, b DESC, c DESC</li>
+</ul>
+<p>如果WHERE使用素引的最左前缀定义为常量，则order by能使用索引</p>
+<ul>
+<li>WHERE a &#x3D; const ORDER BY b,c</li>
+<li>WHERE a &#x3D; const AND b &#x3D; const ORDER BY c</li>
+<li>WHERE a &#x3D; const ORDER BY b, c</li>
+<li>WHERE a &#x3D; const AND b &gt; const ORDER BY b, c</li>
+</ul>
+<p>不能使用索引进行排序</p>
+<ul>
+<li>ORDER BY a ASC, b DESC, c DESC &#x2F;&#x2F;排序不—致</li>
+<li>WHERE g &#x3D; const ORDER BY b, c &#x2F;&#x2F;产丢失a索引</li>
+<li>WHERE a &#x3D; const ORDER BY c &#x2F;&#x2F;产丢失b索引</li>
+<li>WHERE a &#x3D; const ORDER BY a, d &#x2F;&#x2F;d不是素引的一部分</li>
+<li>WHERE a in (…) ORDER BY b, c &#x2F;&#x2F;对于排序来说,多个相等条件也是范围查询</li>
+</ul>
+<h2 id="GroupBy优化与慢查询日志"><a href="#GroupBy优化与慢查询日志" class="headerlink" title="GroupBy优化与慢查询日志"></a>GroupBy优化与慢查询日志</h2><p><strong>GroupBy优化</strong></p>
+<ul>
+<li>group by实质是先排序后进行分组，遵照索引建的最佳左前缀。</li>
+<li>当无法使用索引列，增大max_length_for_sort_data参数的设置 + 增大sort_buffer_size参数的设置。</li>
+<li>where高于having，能写在where限定的条件就不要去having限定了。</li>
+</ul>
+<p><strong>慢查询日志</strong></p>
+<ul>
+<li>MySQL的慢查询日志是MySQL提供的一种日志记录，它用来记录在MySQL中响应时间超过阀值的语句，具体指运行时间超过long_query_time值的SQL，则会被记录到慢查询日志中。</li>
+<li>具体指运行时间超过long_query_time值的SQL，则会被记录到慢查询日志中。long_query_time的默认值为10，意思是运行10秒以上的语句。</li>
+<li>由他来查看哪些SQL超出了我们的最大忍耐时间值，比如一条sql执行超过5秒钟，我们就算慢SQL，希望能收集超过5秒的sql，结合之前explain进行全面分析。</li>
+</ul>
+<p><strong>如何操作</strong><br>默认情况下，MySQL数据库没有开启慢查询日速，需要我们手动来设置这个参数。</p>
+<p>当然，如果不是调优需要的话，一般不建议启动该参数，因为开启慢查询日志会或多或少带来一定的性能影响。慢查询日志支持将日志记录写入文件。</p>
+<p><strong>查看是否开启及如何开启</strong></p>
+<ul>
+<li>默认 - <code>SHOW VARIABLES LIKE &#39;%slow_query_log%&#39;;</code></li>
+<li>开启 - <code>set global slow_query_log=1;</code>，只对当前数据库生效，如果MySQL重启后则会失效。</li>
+</ul>
+<p>如果要<strong>永久生效</strong>，就必须修改配置文件my.cnf(其它系统变量也是如此)</p>
+<p>修改my.cnf文件，[mysqld]下增加或修改参数slow_query_log和slow_query_log_file后，然后重启MySQL服务器。也即将如下两行配置进my.cnf文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">slow_query_log =1</span><br><span class="line">slow_query_log_file=/var/lib/mysqatguigu-slow.log</span><br></pre></td></tr></table></figure>
+
+<p>关于慢查询的参数slow_query_log_file，它指定慢查询日志文件的存放路径，系统默认会给一个缺省的文件host_name-slow.log（如果没有指定参数slow_query_log_file的话）</p>
+<p><strong>开启了慢查询日志后，什么样的SQL才会记录到慢查询日志里面呢？</strong></p>
+<p>这个是由参数long_query_time控制，默认情况下long_query_time的值为10秒，命令：<code>SHOW VARIABLES LIKE &#39;long_query_time%&#39;;</code></p>
+<p>可以使用命令修改，也可以在my.cnf参数里面修改。</p>
+<p>假如运行时间正好等于long_query_time的情况，并不会被记录下来。也就是说，在mysql源码里是判断大于long_query_time，而非大于等于。</p>
+<p>设置慢SQL阈值时间：<code>set global long_query_time=3;</code></p>
+<p><strong>为什么设置后看不出变化？</strong></p>
+<p>需要重新连接或新开一个会话才能看到修改值。</p>
+<p><strong>记录慢SQL并后续分析</strong></p>
+<p>假设我们成功设置慢SQL阈值时间为3秒（<code>set global long_query_time=3;</code>）。</p>
+<p>模拟超时SQL：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; SELECT sleep(4);</span><br><span class="line">+----------+</span><br><span class="line">| sleep(4) |</span><br><span class="line">+----------+</span><br><span class="line">|        0 |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (4.00 sec)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>日志记录：</p>
+<p><img src="/....%5Cpics%5Cdatabase%5CMysql%5Cslow.png"></p>
+<p><strong>查询当前系统中有多少条慢查询记录</strong></p>
+<p><code>mysql&gt; show global status like &#39;%Slow_queries%&#39;;</code></p>
+<p><strong>在配置文件中设置慢SQL阈值时间</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#[mysqld]下配置:</span><br><span class="line">slow_query_log=1;</span><br><span class="line">slow_query_log_file=/var/lib/mysql/atguigu-slow.log</span><br><span class="line">long_query_time=3;</span><br><span class="line">log_output=FILE;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>日志分析工具mysqldumpslow</strong></p>
+<p>在生产环境中，如果要手工分析日志，查找、分析SQL，显然是个体力活，MySQL提供了日志分析工具mysqldumpslow。</p>
+<p>查看mysqldumpslow的帮助信息，<code>mysqldumpslow --help</code>。</p>
+<ul>
+<li>s：是表示按照何种方式排序</li>
+<li>c：访问次数</li>
+<li>l：锁定时间</li>
+<li>r：返回记录</li>
+<li>t：查询时间</li>
+<li>al：平均锁定时间</li>
+<li>ar：平均返回记录数</li>
+<li>at：平均查询时间</li>
+<li>t：即为返回前面多少条的数据</li>
+<li>g：后边搭配一个正则匹配模式，大小写不敏感的</li>
+</ul>
+<p><strong>工作常用参考</strong></p>
+<ul>
+<li><p>得到返回记录集最多的10个SQL：</p>
+<p><code>mysqldumpslow -s r -t 10 /var/lib/mysql/atguigu-slow.log</code></p>
+</li>
+<li><p>得到访问次数最多的10个SQL：</p>
+<p><code>mysqldumpslow -s c -t 10 /var/lib/mysql/atguigu-slow.log</code></p>
+</li>
+<li><p>得到按照时间排序的前10条里面含有左连接的查询语句：</p>
+<p><code>mysqldumpslow -s t -t 10 -g &quot;left join&quot; /var/lib/mysql/atguigu-slow.log</code></p>
+</li>
+<li><p>另外建议在使用这些命令时结合│和more 使用，否则有可能出现爆屏情况：</p>
+<p><code>mysqldumpslow -s r-t 10 /ar/lib/mysql/atguigu-slow.log | more</code></p>
+</li>
+</ul>
+<h2 id="用Show-Profile进行sql分析"><a href="#用Show-Profile进行sql分析" class="headerlink" title="用Show Profile进行sql分析"></a>用Show Profile进行sql分析</h2><p>Show Profile是mysql提供可以用来分析当前会话中语句执行的资源消耗情况。可以用于SQL的调优的测量。</p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/show-profile.html">官方文档</a></p>
+<p>默认情况下，参数处于关闭状态，并保存最近15次的运行结果。</p>
+<p><strong>分析步骤</strong></p>
+<p>1.<strong>是否支持</strong>，看看当前的mysql版本是否支持。</p>
+<p><code>mysql&gt; show variables like &#39;profiling&#39;;</code></p>
+<p>默认是关闭，使用前需要开启。</p>
+<p>2.开启功能，默认是关闭，使用前需要开启。</p>
+<p><code>set profiling=on;</code></p>
+<p>3.<strong>运行SQL</strong></p>
+<p>4.<strong>查看结果</strong>，<code>show profiles;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; show profiles;</span><br><span class="line">+----------+------------+-----------------------------------------------+</span><br><span class="line">| Query_ID | Duration   | Query                                         |</span><br><span class="line">+----------+------------+-----------------------------------------------+</span><br><span class="line">|        1 | 0.00204000 | show variables like &#x27;profiling&#x27;               |</span><br><span class="line">|        2 | 0.55134250 | select * from emp group by id%10 limit 150000 |</span><br><span class="line">|        3 | 0.56902000 | select * from emp group by id%20 order by 5   |</span><br><span class="line">+----------+------------+-----------------------------------------------+</span><br><span class="line">3 rows in set, 1 warning (0.00 sec)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>5.诊断SQL，<code>show profile cpu,block io for query 上一步前面的问题SQL数字号码;</code></p>
+<p><code>mysql&gt; show profile cpu,block io for query 3;</code></p>
+<p>参数备注</p>
+<ul>
+<li>ALL：显示所有的开销信息。</li>
+<li>BLOCK IO：显示块lO相关开销。</li>
+<li>CONTEXT SWITCHES ：上下文切换相关开销。</li>
+<li>CPU：显示CPU相关开销信息。</li>
+<li>IPC：显示发送和接收相关开销信息。</li>
+<li>MEMORY：显示内存相关开销信息。</li>
+<li>PAGE FAULTS：显示页面错误相关开销信息。</li>
+<li>SOURCE：显示和Source_function，Source_file，Source_line相关的开销信息。</li>
+<li>SWAPS：显示交换次数相关开销的信息。</li>
+</ul>
+<p>6.日常开发需要注意的结论</p>
+<ul>
+<li>converting HEAP to MyISAM 查询结果太大，内存都不够用了往磁盘上搬了。</li>
+<li>Creating tmp table 创建临时表，拷贝数据到临时表，用完再删除</li>
+<li>Copying to tmp table on disk 把内存中临时表复制到磁盘，危险!<br>locked</li>
+</ul>
+<h2 id="全局查询日志"><a href="#全局查询日志" class="headerlink" title="全局查询日志"></a>全局查询日志</h2><p>永远不要在生产环境开启这个功能。</p>
+<p>配置文件启用。在mysql的my.cnf中，设置如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#开启</span><br><span class="line">general_log=1</span><br><span class="line">#记录日志文件的路径</span><br><span class="line">general_log_file=/path/logfile</span><br><span class="line">#输出格式</span><br><span class="line">log_output=FILE</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编码启用。命令如下：</p>
+<ul>
+<li><code>set global general_log=1;</code></li>
+<li><code>set global log_output=&#39;TABLE&#39;;</code></li>
+</ul>
+<p>此后，你所编写的sql语句，将会记录到mysql库里的geneial_log表，可以用下面的命令查看</p>
+<p><code>mysql&gt; select * from mysql.general_log;</code></p>
+<h1 id="MySQL锁机制"><a href="#MySQL锁机制" class="headerlink" title="MySQL锁机制"></a>MySQL锁机制</h1><h2 id="数据库锁理论概述"><a href="#数据库锁理论概述" class="headerlink" title="数据库锁理论概述"></a>数据库锁理论概述</h2><p>锁是计算机协调多个进程或线程并发访问某一资源的机制。</p>
+<p>在数据库中，除传统的计算资源（如CPU、RAM、I&#x2F;O等）的争用以外<strong>，数据也是一种供许多用户共享的资源。如何保证数据并发访问的一致性、有效性是所有数据库必须解决的一个问题，锁冲突也是影响数据库并发访问性能的一个重要因素</strong>。从这个角度来说，锁对数据库而言显得尤其重要，也更加复杂。</p>
+<p><strong>类比：网上购物</strong></p>
+<p>打个比方，我们到淘宝上买一件商品，商品只有一件库存，这个时候如果还有另一个人买，那么如何解决是你买到还是另一个人买到的问题？</p>
+<p>这里肯定要用到事务，我们先从库存表中取出物品数量，然后插入订单，付款后插入付款表信息，然后更新商品数量。在这个过程中，使用锁可以对有限的资源进行保护，解决隔离和并发的矛盾。</p>
+<p><strong>锁的分类</strong></p>
+<p>从对数据操作的类型（读\写）分</p>
+<ul>
+<li>读锁（共享锁）：针对同一份数据，多个读操作可以同时进行而不会互相影响。</li>
+<li>写锁（排它锁）：当前写操作没有完成前，它会阻断其他写锁和读锁。</li>
+</ul>
+<p>从对数据操作的粒度分</p>
+<ul>
+<li>表锁</li>
+<li>行锁</li>
+</ul>
+<p><strong>表锁（偏读）</strong></p>
+<p>特点：偏向MyISAM存储引擎，开销小，加锁快；无死锁；锁定粒度大，发生锁冲突的概率最高，并发度最低。</p>
+<p>手动增加表锁</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">lock table 表名字 read(write), 表名字2 read(write), 其他;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; lock table mylock read;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>查看表上加过的锁</p>
+<p><code>mysql&gt; show open tables;</code></p>
+<p>释放锁</p>
+<p><code>mysql&gt; unlock tables;</code></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>MyISAM在执行查询语句（SELECT）前，会自动给涉及的所有表加读锁，在执行增删改操作前，会自动给涉及的表加写锁。</p>
+<p>MySQL的表级锁有两种模式：</p>
+<ol>
+<li>表共享读锁(Table Read Lock)</li>
+<li>表独占写锁(Table Write Lock)</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>锁类型</th>
+<th>可否兼容</th>
+<th>读锁</th>
+<th>写锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读锁</td>
+<td>是</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>写锁</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<p>结合上表，所以对MyISAM表进行操作，会有以下情况：</p>
+<ol>
+<li>对MyISAM表的读操作（加读锁），不会阻塞其他进程对同一表的读请求，但会阻塞对同一表的写请求。只有当读锁释放后，才会执行其它进程的写操作。</li>
+<li>对MyISAM表的写操作〈加写锁），会阻塞其他进程对同一表的读和写操作，只有当写锁释放后，才会执行其它进程的读写操作。</li>
+</ol>
+<p><strong>简而言之，就是读锁会阻塞写，但是不会堵塞读。而写锁则会把读和写都堵塞。</strong></p>
+<p><strong>表锁分析</strong></p>
+<p><em>看看哪些表被加锁了</em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; show open tables;</span><br></pre></td></tr></table></figure>
+
+<p><em>如何分析表锁定</em></p>
+<p>可以通过检查table_locks_waited和table_locks_immediate状态变量来分析系统上的表锁定。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt;  show status like &#x27;table_locks%&#x27;;</span><br><span class="line">+-----------------------+-------+</span><br><span class="line">| Variable_name         | Value |</span><br><span class="line">+-----------------------+-------+</span><br><span class="line">| Table_locks_immediate | 170   |</span><br><span class="line">| Table_locks_waited    | 0     |</span><br><span class="line">+-----------------------+-------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里有两个状态变量记录MySQL内部表级锁定的情况，两个变量说明如下：</p>
+<ul>
+<li>Table_locks_immediate：产生表级锁定的次数，表示可以立即获取锁的查询次数，每立即获取锁值加1 ;</li>
+<li>Table_locks_waited：出现表级锁定争用而发生等待的次数(不能立即获取锁的次数，每等待一次锁值加1)，此值高则说明存在着较严重的表级锁争用情况；</li>
+</ul>
+<p>此外，MyISAM的读写锁调度是写优先，这也是MyISAM不适合做写为主表的引擎。因为写锁后，其他线程不能做任何操作，大量的更新会使查询很难得到锁，从而造成永远阻塞。</p>
+<h2 id="行锁理论"><a href="#行锁理论" class="headerlink" title="行锁理论"></a>行锁理论</h2><p>偏向InnoDB存储引擎，开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。</p>
+<p>InnoDB与MyISAM的最大不同有两点：一是支持事务(TRANSACTION)；二是采用了行级锁。</p>
+<p><strong>由于行锁支持事务，复习老知识</strong></p>
+<ul>
+<li>事务(Transaction）及其ACID属性</li>
+<li>并发事务处理带来的问题</li>
+<li>事务隔离级别</li>
+</ul>
+<p>事务是由一组SQL语句组成的逻辑处理单元，事务具有以下4个属性，通常简称为事务的ACID属性：<strong>略</strong>，参考：<a href="https://blog.csdn.net/weixin_46168350/article/details/117229761">https://blog.csdn.net/weixin_46168350/article/details/117229761</a></p>
+<p>常看当前数据库的事务隔离级别：<code>show variables like &#39;tx_isolation&#39;;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; show variables like &#x27;tx_isolation&#x27;;</span><br><span class="line">+---------------+-----------------+</span><br><span class="line">| Variable_name | Value           |</span><br><span class="line">+---------------+-----------------+</span><br><span class="line">| tx_isolation  | REPEATABLE-READ |</span><br><span class="line">+---------------+-----------------+</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>读写锁：表锁</p>
+<p>事务：行锁</p>
+<h2 id="索引失效行锁变表锁"><a href="#索引失效行锁变表锁" class="headerlink" title="索引失效行锁变表锁"></a>索引失效行锁变表锁</h2><p>无索引行锁升级为表锁</p>
+<p>原因之网友：Mysql 的行锁是通过索引实现的，行锁锁的是索引，没有索引就不行了举报</p>
+<h2 id="间隙锁危害"><a href="#间隙锁危害" class="headerlink" title="间隙锁危害"></a>间隙锁危害</h2><p><img src="/....%5Cpics%5Cdatabase%5CMysql%5C%E9%97%B4%E9%9A%99%E9%94%81.png"></p>
+<p><strong>什么是间隙锁</strong></p>
+<p>当我们用范围条件而不是相等条件检索数据，并请求共享或排他锁时，InnoDB会给符合条件的已有数据记录的索引项加锁，对于键值在条件范围内但<strong>并不存在</strong>的记录，叫做“间隙（GAP）”。</p>
+<p>InnoDB也会对这个“间隙”加锁，这种锁机制就是所谓的间隙锁（Next-Key锁）。</p>
+<p><strong>危害</strong></p>
+<p>因为Query执行过程中通过过范围查找的话，他会锁定整个范围内所有的索引键值，即使这个键值并不存在。</p>
+<p>间隙锁有一个比较致命的弱点，就是当锁定一个范围键值之后，即使某些不存在的键值也会被无辜的锁定，而造成在锁定的时候无法插入锁定键值范围内的任何数据。在某些场景下这可能会对性能造成很大的危害。</p>
+<h2 id="如何锁定一行"><a href="#如何锁定一行" class="headerlink" title="如何锁定一行"></a>如何锁定一行</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">begin;</span><br><span class="line">select * from test_db where a=8 for update</span><br><span class="line">commit;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="行锁总结与页锁"><a href="#行锁总结与页锁" class="headerlink" title="行锁总结与页锁"></a>行锁总结与页锁</h2><p>Innodb存储引擎由于实现了行级锁定，虽然在锁定机制的实现方面所带来的性能损耗可能比表级锁定会要更高一些，但是在整体并发处理能力方面要远远优于MyISAM的表级锁定的。当系统并发量较高的时候，Innodb的整体性能和MylISAM相比就会有比较明显的优势了。</p>
+<p>但是，Innodb的行级锁定同样也有其脆弱的一面，当我们使用不当的时候，可能会让Innodb的整体性能表现不仅不能比MyISAM高，甚至可能会更差。</p>
+<p><strong>行锁分析</strong></p>
+<p>如何分析行锁定<br>通过检查lnnoDB_row_lock状态变量来分析系统上的行锁的争夺情况</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql&gt; show status like &#x27;innodb_row_lock%&#x27;;</span><br><span class="line">+-------------------------------+-------+</span><br><span class="line">| Variable_name                 | Value |</span><br><span class="line">+-------------------------------+-------+</span><br><span class="line">| Innodb_row_lock_current_waits | 0     |</span><br><span class="line">| Innodb_row_lock_time          | 0     |</span><br><span class="line">| Innodb_row_lock_time_avg      | 0     |</span><br><span class="line">| Innodb_row_lock_time_max      | 0     |</span><br><span class="line">| Innodb_row_lock_waits         | 0     |</span><br><span class="line">+-------------------------------+-------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+
+<p>对各个状态量的说明如下:</p>
+<ul>
+<li>Innodb_row_lock_current_waits：当前正在等待锁定的数量；</li>
+<li>Innodb_row_lock_time：从系统启动到现在锁定总时间长度；</li>
+<li>Innodb_row_lock_time_avg：每次等待所花平均时间；</li>
+<li>Innodb_row_lock_time_max：从系统启动到现在等待最常的一次所花的时间；</li>
+<li>Innodb_row_lock_waits：系统启动后到现在总共等待的次数；</li>
+</ul>
+<p>对于这5个状态变量，比较重要的主要是</p>
+<ul>
+<li>Innodb_row_lock_time_avg（等待平均时长）</li>
+<li>lnnodb_row_lock_waits（等待总次数）</li>
+<li>lnnodb_row_lock_time（等待总时长）这三项。</li>
+</ul>
+<p>尤其是当等待次数很高，而且每次等待时长也不小的时候，我们就需要分析系统中为什么会有如此多的等待，然后根据分析结果着手指定优化计划。</p>
+<p><strong>优化建议</strong></p>
+<ol>
+<li>尽可能让所有数据检索都通过索引来完成，避免无索引行锁升级为表锁。</li>
+<li>合理设计索引，尽量缩小锁的范围</li>
+<li>尽可能较少检索条件，避免间隙锁</li>
+<li>尽量控制事务大小，减少锁定资源量和时间长度</li>
+<li>尽可能低级别事务隔离</li>
+</ol>
+<p><strong>页锁</strong></p>
+<p>开销和加锁时间界于表锁和行锁之间;会出现死锁;锁定粒度界于表锁和行锁之间，并发度一般。（了解一下即可）</p>
+<h1 id="其他知识"><a href="#其他知识" class="headerlink" title="其他知识"></a>其他知识</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#创建用户</span><br><span class="line">create user &quot;ming&quot;@&quot;%&quot; identified by &quot;xxxx&quot;;</span><br><span class="line">#修改密码</span><br><span class="line">alter user&#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;&#x27;;</span><br><span class="line"></span><br><span class="line"># 授予权限</span><br><span class="line">grant all PRIVILEGES on *.*  to &#x27;ming&quot;@&quot;%&#x27;  </span><br><span class="line"></span><br><span class="line">grant all privileges on database_name.* to &#x27;username&#x27;@&#x27;localhost&#x27;;</span><br><span class="line"></span><br><span class="line">GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO &#x27;ming&#x27;@&#x27;%&#x27; WITH GRANT OPTION;</span><br><span class="line"></span><br><span class="line">#启动： sudo service mysql start</span><br><span class="line"></span><br><span class="line">#关闭： sudo service mysql stop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#步骤：</span><br><span class="line"></span><br><span class="line">mysql -u root -p</span><br><span class="line"></span><br><span class="line">SHOW DATABASES;</span><br><span class="line"></span><br><span class="line">use mysql;</span><br><span class="line"></span><br><span class="line">RENAME USER &#x27;root&#x27;@&#x27;localhost&#x27; TO &#x27;root&#x27;@&#x27;%&#x27;;</span><br><span class="line"></span><br><span class="line">1.update user set host=&#x27;%&#x27; where user=&#x27;root&#x27; limit 1(两种方法都可以，选一个)</span><br><span class="line"></span><br><span class="line">2.grant all privileges on.to ‘root’@’%’ identified by ‘abc.123’ with grant option;</span><br><span class="line"></span><br><span class="line">flush privileges;</span><br><span class="line"></span><br><span class="line">select user,authentication_string,host from user;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h2><p><strong>查看字符集</strong></p>
+<ul>
+<li><code>show variables like &#39;character%&quot;;</code></li>
+<li><code>show variables like ‘%char%&quot;;</code></li>
+</ul>
+<p><strong>数据文件</strong></p>
+<p>两系统</p>
+<ul>
+<li><p>windows<br>输入mysql后select @@database;</p>
+</li>
+<li><p>linux<br>默认路径：&#x2F;var&#x2F;lib&#x2F;mysql</p>
+</li>
+</ul>
+<p>frm文件（form）</p>
+<ul>
+<li>存放表结构</li>
+</ul>
+<p>myd文件（my data）</p>
+<ul>
+<li>存放表数据</li>
+</ul>
+<p>myi文件（my index）</p>
+<ul>
+<li>存放表索引</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、加入开机启动</span><br><span class="line">systemctl enable mysqld</span><br><span class="line"></span><br><span class="line">2、启动mysql服务进程</span><br><span class="line">systemctl start mysqld</span><br><span class="line"></span><br><span class="line"># 设置开机启动mysql</span><br><span class="line">[root@VM-16-2-centos ~]# chkconfig mysql on</span><br><span class="line"></span><br><span class="line"># 2,3,4,5 启动就可以</span><br><span class="line">[root@VM-16-2-centos ~]# chkconfig --list|grep mysql</span><br><span class="line"></span><br><span class="line"># 看到[*]mysql 表示开机会后会启动mysql</span><br><span class="line">[root@VM-16-2-centos ~]# ntsysv</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">如何配置</span><br><span class="line"></span><br><span class="line">Windows - my.ini文件</span><br><span class="line">Linux - /etc/my.cnf文件</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>database</category>
+      </categories>
+  </entry>
+</search>
