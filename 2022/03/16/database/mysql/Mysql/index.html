@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="database,mysql," />
 
 
 
@@ -81,26 +81,28 @@
 
 <meta name="description" content="逻辑架构      连接层每一个客户端发起一个新的请求都由服务器端的连接&#x2F;线程处理工具负责接收客户端的请求并开辟一个新的内存空间，在服务器端的内存中生成一个新的线程，当每一个用户连接到服务器端的时候就会在进程地址空间里生成一个新的线程用于响应客户端请求，用户发起的查询请求都在线程空间内运行， 结果也在这里面缓存并返回给服务器端。线程的重用和销毁都是由连接&#x2F;线程处理管理器实现的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql">
+<meta property="og:title" content="Mysql">
 <meta property="og:url" content="http://example.com/2022/03/16/database/mysql/Mysql/index.html">
 <meta property="og:site_name" content="ming">
 <meta property="og:description" content="逻辑架构      连接层每一个客户端发起一个新的请求都由服务器端的连接&#x2F;线程处理工具负责接收客户端的请求并开辟一个新的内存空间，在服务器端的内存中生成一个新的线程，当每一个用户连接到服务器端的时候就会在进程地址空间里生成一个新的线程用于响应客户端请求，用户发起的查询请求都在线程空间内运行， 结果也在这里面缓存并返回给服务器端。线程的重用和销毁都是由连接&#x2F;线程处理管理器实现的。">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2022/03/16/database/pics/database/mysql/逻辑架构2.png">
-<meta property="og:image" content="http://example.com/2022/03/16/database/pics/database/mysql/逻辑架构.png">
-<meta property="og:image" content="http://example.com/2022/03/16/database/pics/database/mysql/查询过程.png">
-<meta property="og:image" content="http://example.com/....%5Cpics%5Cdatabase%5Cmysql%5C%E7%B4%A2%E5%BC%951.jpg">
-<meta property="og:image" content="http://example.com/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id1.jpg">
-<meta property="og:image" content="http://example.com/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id2.jpg">
-<meta property="og:image" content="http://example.com/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id3.jpg">
-<meta property="og:image" content="http://example.com/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_Case.png">
-<meta property="og:image" content="http://example.com/....%5Cpics%5Cdatabase%5CMysql%5Cslow.png">
-<meta property="og:image" content="http://example.com/....%5Cpics%5Cdatabase%5CMysql%5C%E9%97%B4%E9%9A%99%E9%94%81.png">
+<meta property="og:image" content="http://example.com/images/database/mysql/逻辑架构2.png">
+<meta property="og:image" content="http://example.com/.com/pics/database/mysql/逻辑架构.png">
+<meta property="og:image" content="http://example.com/.com/pics/database/mysql/查询过程.png">
+<meta property="og:image" content="http://example.com/.com//....%5Cpics%5Cdatabase%5Cmysql%5C%E7%B4%A2%E5%BC%951.jpg">
+<meta property="og:image" content="http://example.com/.com//....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id1.jpg">
+<meta property="og:image" content="http://example.com/.com//....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id2.jpg">
+<meta property="og:image" content="http://example.com/.com//....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id3.jpg">
+<meta property="og:image" content="http://example.com/.com//....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_Case.png">
+<meta property="og:image" content="http://example.com/.com//....%5Cpics%5Cdatabase%5CMysql%5Cslow.png">
+<meta property="og:image" content="http://example.com/.com//....%5Cpics%5Cdatabase%5CMysql%5C%E9%97%B4%E9%9A%99%E9%94%81.png">
 <meta property="article:published_time" content="2022-03-16T00:12:43.000Z">
-<meta property="article:modified_time" content="2022-05-05T16:32:23.309Z">
+<meta property="article:modified_time" content="2022-05-06T05:54:46.020Z">
 <meta property="article:author" content="ming">
+<meta property="article:tag" content="database">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/03/16/database/pics/database/mysql/逻辑架构2.png">
+<meta name="twitter:image" content="http://example.com/images/database/mysql/逻辑架构2.png">
 
 
 
@@ -136,7 +138,7 @@
 
 
 
-  <title>mysql | ming</title>
+  <title>Mysql | ming</title>
   
 
 
@@ -324,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mysql</h1>
+          <h1 class="post-title" itemprop="name headline">Mysql</h1>
         
 
         <div class="post-meta">
@@ -401,9 +403,9 @@
       
 
       
-        <h1 id="逻辑架构"><a href="#逻辑架构" class="headerlink" title="逻辑架构"></a>逻辑架构</h1><img src="..\..\pics\database\mysql\逻辑架构2.png" style="zoom:45%;" />
+        <h1 id="逻辑架构"><a href="#逻辑架构" class="headerlink" title="逻辑架构"></a>逻辑架构</h1><img src="/images/database/mysql/逻辑架构2.png" style="zoom:45%;">
 
-<img src="..\..\pics\database\mysql\逻辑架构.png" style="zoom:75%;" />
+<img src="/.com//..\pics\database\mysql\逻辑架构.png" style="zoom:75%;">
 
 
 
@@ -442,7 +444,7 @@
 
 
 <h2 id="存储层"><a href="#存储层" class="headerlink" title="存储层"></a>存储层</h2><p>数据存储层，主要是将数据存储在运行于裸设备的文件系统之上，并完成与存储引擎的交互。</p>
-<h2 id="MySQL查询过程"><a href="#MySQL查询过程" class="headerlink" title="MySQL查询过程"></a><strong>MySQL查询过程</strong></h2><img src="..\..\pics\database\mysql\查询过程.png" style="zoom:44%;" />
+<h2 id="MySQL查询过程"><a href="#MySQL查询过程" class="headerlink" title="MySQL查询过程"></a><strong>MySQL查询过程</strong></h2><img src="/.com//..\pics\database\mysql\查询过程.png" style="zoom:44%;">
 
 
 
@@ -517,7 +519,7 @@
 <p>你可以简单理解为“排好序的快速查找数据结构”。</p>
 <p>详解：</p>
 <p>在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用(指向）数据，这样就可以在这些数据结构上实现高级查找算法。这种数据结构，就是索引。下图就是<strong>一种可能的索引方式</strong>示例：</p>
-<p><img src="/....%5Cpics%5Cdatabase%5Cmysql%5C%E7%B4%A2%E5%BC%951.jpg"></p>
+<p><img src="/.com//....%5Cpics%5Cdatabase%5Cmysql%5C%E7%B4%A2%E5%BC%951.jpg"></p>
 <p>左边是<strong>数据表</strong>，一共有两列七条记录，最左边的是数据记录的<strong>物理地址</strong>。</p>
 <p>为了加快Col2的查找，可以维护一个右边所示的二叉查找树，每个节点分别包含索引键值和一个指向对应数据记录物理地址的指针，这样就可以运用二叉查找在一定的复杂度内获取到相应数据，从而快速的检索出符合条件的记录。</p>
 <p><strong>数据本身之外，数据库还维护着一个满足特定查找算法的数据结构，这些数据结构以某种方式指向数据，这样就可以在这些数据结构的基础上实现高级查找算法，这种数据结构就是索引。</strong></p>
@@ -560,7 +562,7 @@
 </thead>
 <tbody><tr>
 <td>创建</td>
-<td>- <code>CREATE [UNIQUE] INDEX indexName ON mytable(columnName(length));</code><br/>- <code>ALTER mytable ADD [UNIQUE] INDEX [indexName] ON (columnName(length));</code></td>
+<td>- <code>CREATE [UNIQUE] INDEX indexName ON mytable(columnName(length));</code><br>- <code>ALTER mytable ADD [UNIQUE] INDEX [indexName] ON (columnName(length));</code></td>
 </tr>
 <tr>
 <td>删除</td>
@@ -647,11 +649,11 @@
 <li>id相同不同，同时存在</li>
 </ul>
 <p>①<strong>id相同，执行顺序由上至下</strong></p>
-<p><img src="/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id1.jpg"></p>
+<p><img src="/.com//....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id1.jpg"></p>
 <p>②<strong>id 不同，id 不同，如果是子查询，id 的序号会递增，id 值越大优先级越高，越先被执行</strong></p>
-<p><img src="/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id2.jpg"></p>
+<p><img src="/.com//....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id2.jpg"></p>
 <p>③id 如果相同，可以认为是一组，从上往下顺序执行；<strong>在所有组中，id 值越大，优先级越高</strong>，越先执行衍生&#x3D; DERIVED</p>
-<p><img src="/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id3.jpg"></p>
+<p><img src="/.com//....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_id3.jpg"></p>
 <p>关注点：<font color="red">id 号每个号码，表示一趟独立的查询。一个sql 的查询趟数越少越好。</font></p>
 <h2 id="explain之select-type和table介绍"><a href="#explain之select-type和table介绍" class="headerlink" title="explain之select_type和table介绍"></a>explain之select_type和table介绍</h2><p><strong>select_type</strong>：查询的类型，主要是用于区别普通查询、联合查询、子查询等的复杂查询。</p>
 <p><strong>select_type有哪些？</strong></p>
@@ -721,7 +723,7 @@
 <p>在没有GROUPBY子句的情况下，基于索引优化MIN&#x2F;MAX操作，或者对于MyISAM存储引擎优化COUNT(*)操作，不必等到执行阶段再进行计算，查询执行计划生成的阶段即完成优化。</p>
 <p><strong>distinct</strong></p>
 <p>优化distinct操作，在找到第一匹配的元组后即停止找同样值的动作。</p>
-<h2 id="explain之热身Case"><a href="#explain之热身Case" class="headerlink" title="explain之热身Case"></a>explain之热身Case</h2><p><img src="/....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_Case.png"></p>
+<h2 id="explain之热身Case"><a href="#explain之热身Case" class="headerlink" title="explain之热身Case"></a>explain之热身Case</h2><p><img src="/.com//....%5Cpics%5Cdatabase%5Cmysql%5Cexplain_Case.png"></p>
 <p>第一行（执行顺序4）：id列为1，表示是union里的第一个select，select_type列的primary表示该查询为外层查询，table列被标记为，表示查询结果来自一个衍生表，其中derived3中3代表该查询衍生自第三个select查询，即id为3的select。<code>【select d1.name… 】</code></p>
 <p>第二行（执行顺序2）：id为3，是整个查询中第三个select的一部分。因查询包含在from中，所以为derived。<code>【select id,namefrom t1 where other_column=’’】</code></p>
 <p>第三行（执行顺序3）：select列表中的子查询select_type为subquery，为整个查询中的第二个select。<code>【select id from t3】</code></p>
@@ -964,7 +966,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT sleep(4);</span><br><span class="line">+----------+</span><br><span class="line">| sleep(4) |</span><br><span class="line">+----------+</span><br><span class="line">|        0 |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (4.00 sec)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>日志记录：</p>
-<p><img src="/....%5Cpics%5Cdatabase%5CMysql%5Cslow.png"></p>
+<p><img src="/.com//....%5Cpics%5Cdatabase%5CMysql%5Cslow.png"></p>
 <p><strong>查询当前系统中有多少条慢查询记录</strong></p>
 <p><code>mysql&gt; show global status like &#39;%Slow_queries%&#39;;</code></p>
 <p><strong>在配置文件中设置慢SQL阈值时间</strong></p>
@@ -1143,7 +1145,7 @@
 <p>事务：行锁</p>
 <h2 id="索引失效行锁变表锁"><a href="#索引失效行锁变表锁" class="headerlink" title="索引失效行锁变表锁"></a>索引失效行锁变表锁</h2><p>无索引行锁升级为表锁</p>
 <p>原因之网友：Mysql 的行锁是通过索引实现的，行锁锁的是索引，没有索引就不行了举报</p>
-<h2 id="间隙锁危害"><a href="#间隙锁危害" class="headerlink" title="间隙锁危害"></a>间隙锁危害</h2><p><img src="/....%5Cpics%5Cdatabase%5CMysql%5C%E9%97%B4%E9%9A%99%E9%94%81.png"></p>
+<h2 id="间隙锁危害"><a href="#间隙锁危害" class="headerlink" title="间隙锁危害"></a>间隙锁危害</h2><p><img src="/.com//....%5Cpics%5Cdatabase%5CMysql%5C%E9%97%B4%E9%9A%99%E9%94%81.png"></p>
 <p><strong>什么是间隙锁</strong></p>
 <p>当我们用范围条件而不是相等条件检索数据，并请求共享或排他锁时，InnoDB会给符合条件的已有数据记录的索引项加锁，对于键值在条件范围内但<strong>并不存在</strong>的记录，叫做“间隙（GAP）”。</p>
 <p>InnoDB也会对这个“间隙”加锁，这种锁机制就是所谓的间隙锁（Next-Key锁）。</p>
@@ -1237,6 +1239,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/database/" rel="tag"># database</a>
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
       
 
       
@@ -1353,6 +1363,15 @@
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
